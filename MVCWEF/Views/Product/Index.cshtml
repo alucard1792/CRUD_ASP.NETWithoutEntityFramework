@@ -1,0 +1,35 @@
+﻿<!--Model datatype is: Datatable, porque estamos retornando un datatable en el metodo index-->
+@model System.Data.DataTable
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<table class="table table-bordered table-striped ">
+    <tr>
+        <td>id</td>
+        <td>name</td>
+        <td>price</td>
+        <td>count</td>
+        <td>option</td>
+    </tr>
+    @for (int i = 0; i < Model.Rows.Count; i++)
+    {
+    <tr>
+        <td>@Model.Rows[i][0]</td>
+        <td>@Model.Rows[i][1]</td>
+        <td>@Model.Rows[i][2]</td>
+        <td>@Model.Rows[i][3]</td>
+        <!--Url.Action(<string actionName(O SEA METODO)>, <string controllerName(NOMBRE CONTROLADOR)>, <object routeValues>)-->
+        <td><a href="@Url.Action("Edit", "Product", new {@id = Model.Rows[i][0] })">Edit</a>
+            <a href="@Url.Action("Delete", "Product", new {@id = Model.Rows[i][0] })">Delete</a></td>
+    </tr>
+    }
+
+    <!--redireccion usando razor y el nombre del metodo (o sea vista de redireccion)-->
+    <a href="@Url.Action("create", "Product")">Create</a>
+
+</table>
+
